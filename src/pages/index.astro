@@ -1,0 +1,15 @@
+---
+import Layout from '../layouts/GuideLayout.astro';
+import Cards from '../components/GuideCards.astro';
+
+import {getCollection} from 'astro:content';import {href} from '../lib/site';
+const posts=(await getCollection('blog',p=>!p.data.draft)).sort((a,b)=>b.data.updated.localeCompare(a.data.updated));
+---
+<Layout title="Clash 下载、官网入口与使用教程" description="查找 Clash 客户端官网与开发者发布入口，选择安卓手机版或 Windows 电脑版，学习订阅导入、规则模式和连接排查。">
+<section class="g-wrap g-hero"><div class="g-hero-copy"><span class="g-kicker">下载之前，先选对工具</span><h1>Clash 客户端，<br/>按你的设备来选。</h1><p>安卓、Windows、Mac，各有适合的安装方式。这里整理项目入口、安装包选择和配置过程，省去来回翻找。</p><div class="g-actions"><a class="btn btn-primary" href={href('/download/')}>查看客户端下载 ↗</a><a class="btn btn-secondary btn-outline-primary" href={href('/docs/')}>从入门教程开始</a></div><div class="g-hero-meta">Windows · Android · macOS · Linux</div></div><div class="g-visual"><div class="visual-top"><span>CLASH / CONNECTION</span><span class="status-dot">●</span></div><div class="visual-orbit"><span>C</span></div><div class="visual-row"><span>选择客户端</span><strong>01</strong></div><div class="visual-row"><span>导入配置</span><strong>02</strong></div><div class="visual-row"><span>检查规则与连接</span><strong>03</strong></div></div></section>
+<section class="g-section g-wrap"><div class="g-heading"><span class="g-kicker">客户端下载</span><h2>你的设备，应该装哪个版本？</h2><p>先选平台，再看包名。每个下载入口都附上项目来源。</p></div><div class="g-platforms">{[['/windows/','⊞','Windows 电脑版','区分 x64 / ARM64，了解系统代理与 TUN。'],['/mobile/','◈','Android 手机版','选择 APK 架构，处理安装与 VPN 授权。'],['/download/','⌘','更多平台','查找 Mac、Linux 客户端及原始发布页。']].map(([url,icon,title,desc])=><a class="g-platform" href={href(url)}><span class="platform-icon">{icon}</span><h3>{title}</h3><p>{desc}</p><span>查看下载指引 →</span></a>)}</div></section>
+<section class="g-band"><div class="g-wrap g-source"><div><span class="g-kicker">来源核对</span><h2>搜索“Clash 官网”，<br/>先看你要找哪一个项目。</h2></div><div><p>Clash、Mihomo 与图形客户端有各自的仓库。核对项目维护者、发行记录和安装包，能减少下载到同名文件的风险。</p><a class="btn btn-primary" href={href('/official/')}>查看开发者入口表 →</a></div></div></section>
+<section class="g-section g-wrap"><div class="g-heading"><span class="g-kicker">使用路线</span><h2>安装之后，按这个顺序设置。</h2></div><div class="g-steps">{[['导入订阅','检查配置是否成功拉取，再激活使用。'],['启动代理','电脑设置系统代理，安卓确认 VPN 授权。'],['验证访问','用实际页面与连接记录检查规则命中。']].map(([t,d],n)=><div><span>0{n+1}</span><h3>{t}</h3><p>{d}</p></div>)}</div><a class="g-text-link" href={href('/docs/')}>阅读完整 Clash 使用教程 →</a></section>
+<section class="g-section g-wrap"><div class="g-heading heading-row"><div><span class="g-kicker">配置笔记</span><h2>安装与配置，具体到每一步。</h2></div><a href={href('/blog/')}>全部 {posts.length} 篇文章 →</a></div><Cards posts={posts.slice(0,3)}/></section>
+<section class="g-section g-wrap g-faq"><h2>常见问题</h2><details><summary>下载客户端以后，还需要准备什么？</summary><p>需要兼容的配置或订阅。软件负责运行配置，不会自动附带节点。请向配置提供方核对格式和有效期。</p></details><details><summary>安卓包可以安装在 iPhone 上吗？</summary><p>不可以。APK 对应 Android。iOS 需按客户端支持情况及其官方分发渠道选择，不能使用安卓安装步骤。</p></details><details><summary>显示延迟就说明所有应用都可用吗？</summary><p>延迟只反映探测结果。实际访问还取决于节点、模式、规则和应用是否被代理接管。</p></details></section>
+</Layout>

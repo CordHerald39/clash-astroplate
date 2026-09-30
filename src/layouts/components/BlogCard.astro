@@ -1,0 +1,6 @@
+---
+// Adapted from Astroplate BlogCard; retained template card structure and button styles.
+import {href} from '../../lib/site';
+const {data:p}=Astro.props;
+---
+<article class="g-card bg-body"><span class="g-kicker">{p.data.category}</span><h3 class="mb-3"><a href={href('/blog/'+p.id+'/')}>{p.data.title}</a></h3><p class="mb-6">{p.data.description}</p><div class="g-card-bottom"><time>{p.data.updated}</time><a class="btn btn-outline-primary btn-sm" href={href('/blog/'+p.id+'/')}>阅读全文</a></div></article>

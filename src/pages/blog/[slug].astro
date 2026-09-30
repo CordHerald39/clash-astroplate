@@ -1,0 +1,6 @@
+---
+import {getCollection,render} from 'astro:content';import Layout from '../../layouts/GuideLayout.astro';import {href} from '../../lib/site';
+export async function getStaticPaths(){return(await getCollection('blog',p=>!p.data.draft)).map(p=>({params:{slug:p.id},props:{p}}));}
+const {p}=Astro.props;const {Content,headings}=await render(p);
+---
+<Layout title={p.data.title} description={p.data.description} article date={p.data.date} updated={p.data.updated}><div class="g-wrap g-breadcrumb"><a href={href('/')}>首页</a><span>/</span><a href={href('/blog/')}>博客</a></div><header class="g-wrap g-page-header"><span class="g-kicker">{p.data.category}</span><h1>{p.data.title}</h1><p>{p.data.description}</p><div class="g-meta">{p.data.author} · 更新 {p.data.updated}</div></header><section class="g-wrap g-article-layout"><article class="g-prose"><Content/></article><aside class="g-toc"><h2>文章目录</h2>{headings.filter(x=>x.depth===2).map(h=><a href={'#'+h.slug}>{h.text}</a>)}<a href={href('/blog/')}>← 返回博客</a></aside></section></Layout>

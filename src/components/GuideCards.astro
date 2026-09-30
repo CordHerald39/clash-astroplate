@@ -1,0 +1,4 @@
+---
+import BlogCard from '../layouts/components/BlogCard.astro';const {posts}=Astro.props;
+---
+<div class="g-cards">{posts.map(p=><BlogCard data={p}/>)}</div>

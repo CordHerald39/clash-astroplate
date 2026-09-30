@@ -1,0 +1,5 @@
+---
+import Layout from '../../layouts/GuideLayout.astro';import Cards from '../../components/GuideCards.astro';import {getCollection} from 'astro:content';
+const posts=(await getCollection('blog',p=>!p.data.draft)).sort((a,b)=>b.data.updated.localeCompare(a.data.updated));
+---
+<Layout title="Clash 教程博客：下载、配置与排错" description="阅读 Clash 客户端选择、安卓 APK、Windows 设置、订阅导入和故障排查文章，附开发者资料与操作注意事项。"><header class="g-wrap g-page-header"><span class="g-kicker">教程博客 / {posts.length} 篇</span><h1>找到问题，<br/>再找到下一步。</h1><p>从下载到配置，把容易混淆的环节拆开说明。</p></header><section class="g-wrap g-section"><h2 class="sr-only">文章列表</h2><Cards posts={posts}/></section></Layout>
