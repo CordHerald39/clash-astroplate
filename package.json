@@ -7,9 +7,9 @@
   "packageManager": "pnpm@11.19.0",
   "type": "module",
   "scripts": {
-    "dev": "astro dev --port 4192",
-    "build": "node scripts/themeGenerator.js && astro build && node scripts/check.mjs",
-    "preview": "astro preview --host 127.0.0.1 --port 4192",
+    "dev": "astro dev --port 4202",
+    "build": "astro build && node scripts/check.mjs",
+    "preview": "astro preview --host 127.0.0.1 --port 4202",
     "test": "node scripts/check.mjs"
   },
   "dependencies": {

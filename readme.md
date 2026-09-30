@@ -1,8 +1,12 @@
-# Clash Astroplate 中文指南
+本轮采用 Frontend Design：搜索与问题分类主导，输入匹配文章标题摘要，类别筛选组合生效，零结果提供清空入口；无 JavaScript 时文章仍完整可读。仅本地4202，无推送。
 
-来自 zeon-studio/astroplate 的真实源码改造，原 MIT 许可证保留。公开演示页已移除，加入 Clash 官网入口、下载、手机版、电脑版、教程和博客。下载直达开发者 Releases。
+# Clash 自主设计站 · 蓝色软件帮助台
 
-## 本地运行
+2026-09-30 本地重设计。保持 Astro 静态站架构，界面与 CSS 自主实现，活跃页面不再依赖上游 Tailwind、CustomStyles、main.css 或模板组件。原许可证作为来源记录保留。
+
+本轮仅本地修改，未推送、未部署。工作流文件保留但没有触发。修改前源代码压缩备份在工作区 `私密维护教程/redesign-backups/`。
+
+## 运行
 
 Node 24，pnpm 11.19.0。
 
@@ -12,31 +16,27 @@ pnpm run build
 pnpm run preview
 ```
 
-地址 http://127.0.0.1:4192 。未设置 SITE_URL 时 noindex。内容独立保存在 src/content/blog 和 src/content/pages，正文从二级标题开始。frontmatter: title、description、date、updated、category、tags、author、draft。实质修改才更新日期。
+预览 http://127.0.0.1:4202/ ，默认根路径、noindex。构建后自动检查16个HTML的H1、描述、站内链接与锚点。
 
-## 统一文章导入
+## 编辑
+
+- `src/pages/index.astro`：自主首页结构。
+- `src/styles/guide.css`：完整响应式视觉与内页样式。
+- `src/layouts/GuideLayout.astro`：共用头尾、SEO。
+- `src/content/blog/`：6篇独立Markdown文章。
+- `src/content/pages/`：下载、手机、电脑、教程、来源、关于与隐私。
+
+文章信息使用title、description、date、updated、category、tags、author、draft。正文从二级标题开始。文章修改会自动更新列表、RSS及sitemap；草稿不公开。
+
+## JSON导入接口
 
 ```sh
 node scripts/import-content.mjs article.json
 pnpm run build
 ```
 
-JSON 字段为 id、slug、title、description、publishedAt、updatedAt、category、tags 数组、body Markdown、sources 数组（title/url）、status（published 或 draft）。先完整验证，再原子写入；非法 slug、日期、来源或状态不会覆盖旧文。draft 不发布。新增文章自动进入博客、首页精选、RSS和sitemap。
+统一字段为id、slug、title、description、publishedAt、updatedAt、category、tags、body、sources（title/url）、status（published或draft）。非法路径、日期与字段先校验，失败不覆盖既有文章。
 
-## GitHub Pages
+## 将来发布时
 
-仓库 Settings → Pages → Source 选 GitHub Actions。唯一工作流 pages.yml 使用 configure-pages、upload-pages-artifact、deploy-pages，发布到 https://cordherald39.github.io/clash-astroplate/。没有自定义域名或 CNAME。
-
-正式本地构建（PowerShell）：
-
-```powershell
-$env:SITE_URL='https://cordherald39.github.io'
-$env:BASE_PATH='/clash-astroplate/'
-pnpm run build
-```
-
-未设置 SITE_URL 为本地预览；设置后默认开放索引，可用 ALLOW_INDEX=false 保持noindex。canonical、RSS和sitemap使用构建地址。内链按BASE_PATH生成，Markdown使用相对路径。不得填参考站域名。
-
-## 模板保留
-
-使用上游main.css、base/buttons/components、generated-theme及主题生成脚本；原BlogCard按中文字段与base适配。 template-source及upstream.zip是2026-09-30的上游本地快照，不提交。许可证留在仓库。
+现有GitHub Pages工作流保持原样。本轮没有修改线上站点。SITE_URL和BASE_PATH仅在明确发布时设置；本地不要继承正式环境变量。Markdown内链是相对路径，正式构建仍支持仓库子路径。不会自动绑定域名。

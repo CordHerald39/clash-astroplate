@@ -1,0 +1,6 @@
+---
+import Layout from '../layouts/GuideLayout.astro';
+import AirportGuide from '../components/AirportGuide.astro';
+import {href} from '../lib/site';
+---
+<Layout title="机场推荐与套餐对比" description="比较机场订阅的实际扣款、流量与计费周期，查看优惠码来源、选购方法和 Clash 订阅配置步骤。"><div class="g-wrap" style="padding:48px 24px 0"><h1>机场推荐与套餐对比</h1><p>从套餐条件开始，选适合自己的订阅。</p></div><AirportGuide link={href} download="/download/" tutorial="/docs/"/></Layout>

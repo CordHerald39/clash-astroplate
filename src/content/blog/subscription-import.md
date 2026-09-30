@@ -30,3 +30,5 @@ CMFA 的代理入口在服务启动后出现，因此不必在启动之前反复
 ## 来源
 
 [CMFA 项目](https://github.com/MetaCubeX/ClashMetaForAndroid)、[Clash Verge Rev 入门](https://www.clashverge.dev/guide/quickstart.html)，查阅于 2026-09-30。
+
+进一步阅读：[Clash 订阅更新报错：HTTP 状态与配置解析怎么区分](../subscription-http-errors/)。
