@@ -30,8 +30,8 @@ jobs:
         id: pages
       - run: pnpm run build
         env:
-          SITE_URL: https://cordherald39.github.io
-          BASE_PATH: /clash-astroplate/
+          SITE_URL: https://clashxiazaizhan.com.cn
+          BASE_PATH: '/'
           ALLOW_INDEX: 'true'
       - uses: actions/upload-pages-artifact@v3
         with:
